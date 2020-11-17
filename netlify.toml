@@ -1,0 +1,37 @@
+[build]
+  command   = "yarn build"
+  functions = "out_functions"
+  publish   = "out_publish"
+
+## local next.js development ##
+## `npm run start` ##
+[dev]
+  command = "next dev"
+  publish   = "public"
+  
+## local statis + next-on-netlify testing ##
+## `npm run start:static` ##
+## We manually set the framework to static, otherwise Netlify automatically detects NextJS and redirects do not work.
+## Read more: https://github.com/netlify/cli/blob/master/docs/netlify-dev.md#project-detection
+# [dev]
+#   publish = "out_publish"
+#   functions = "out_functions"
+#   framework = "#static"
+
+[[plugins]]
+package = "netlify-plugin-cache-nextjs"
+
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Header-Source = "netlify.toml"
+
+[[headers]]
+  for = "/"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Header-Source = "netlify.toml"
