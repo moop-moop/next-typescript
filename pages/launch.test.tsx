@@ -1,5 +1,5 @@
 import renderer from 'react-test-renderer'
-import IndexPage from '.'
+import LaunchPage from './launch'
 
 describe('Index page', () => {
   it('should match the snapshot', () => {
@@ -9,7 +9,7 @@ describe('Index page', () => {
       site: 'Kennedy Space Center',
       rocket: 'Falcon 9',
     }
-    const tree = renderer.create(<IndexPage launch={launch} />).toJSON()
+    const tree = renderer.create(<LaunchPage launch={launch} />).toJSON()
     expect(tree).toMatchSnapshot()
   })
 })
